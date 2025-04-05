@@ -18,7 +18,7 @@ const FitPreferencePage = ({ userData, updateUserData, onNext, onBack }: FitPref
   }
 
   return (
-    <div className="container">
+    <div className="container fit-preferences-page">
       <h2>How do you like your t-shirts to fit?</h2>
 
       <form onSubmit={handleSubmit}>
