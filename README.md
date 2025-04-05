@@ -42,4 +42,4 @@ The application uses several factors to calculate your ideal t-shirt size:
 3. **Age**: Adjusts for typical body shape changes and fit preferences by age group
 4. **Fit Preference**: Your preference for tighter or looser t-shirts
 
-These factors are combined to calculate fit percentages for standard t-shirt sizes (XS, S, M, L, XL, 2XL, 3XL).
+These factors are combined to calculate fit percentages for standard t-shirt sizes (XS, S, M, L, XL, 2XL, 3XL).# fitlyv2.0
