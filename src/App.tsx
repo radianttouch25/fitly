@@ -68,7 +68,7 @@ function App() {
     <div className="app">
       <div className="app-header">
         <div className="logo-container">
-          <h1>Fitly</h1>
+          <img src="/logo.png" alt="OTTGolfWear Logo" style={{ maxWidth: '200px', marginBottom: '1rem' }} />
         </div>
 
         {location.pathname !== '/results' && (
@@ -168,7 +168,7 @@ function App() {
       </div>
 
       <div className="app-footer">
-        <p>Find your perfect fit with <span className="brand-text">Fitly</span></p>
+        <p>Find your perfect fit at <span className="brand-text">ottgolfwear.com</span></p>
       </div>
     </div>
   )

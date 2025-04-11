@@ -88,6 +88,13 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.logo-container img {
+  max-width: 200px;
+  height: auto;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(11, 83, 95, 0.5));
+}
+
 .logo {
   height: 60px;
   margin-bottom: 0.5rem;
@@ -921,10 +928,15 @@ select:focus {
 
 .progress-steps {
   font-size: 0.9rem;
-  color: rgba(11, 83, 95, 1);
+  color: rgba(255, 255, 255, 1); /* Changed to white for better visibility */
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Added shadow for better contrast */
+  background: linear-gradient(135deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 100%);
+  padding: 0.4rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 768px) {
@@ -968,8 +980,14 @@ select:focus {
   }
 
   .slider-container {
-    padding: 1.2rem;
+    padding: 1.5rem 2rem;
     max-width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 83, 95, 0.2);
   }
 }
 
@@ -982,14 +1000,38 @@ select:focus {
     margin-bottom: 1.5rem;
   }
 
+  .logo-container img {
+    max-width: 150px;
+  }
+
   h1 {
     font-size: 1.8em;
     margin-bottom: 1rem;
+    /* Preserve all other text styling from desktop */
+    background: linear-gradient(90deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 50%, rgba(11, 83, 95, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1.2px;
+    animation: pulseText 3s infinite alternate;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
   }
 
   h2 {
     font-size: 1.3em;
     margin-bottom: 1.2rem;
+    /* Preserve all other text styling from desktop */
+    background: linear-gradient(90deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    animation: pulseText 3s infinite alternate;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(11, 83, 95, 0.3), 0 0 20px rgba(11, 83, 95, 0.2);
   }
 
   .option-container {
@@ -1000,21 +1042,89 @@ select:focus {
     width: 110px;
     height: 110px;
     padding: 0.8rem;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: rgba(11, 83, 95, 0.8);
+    box-shadow: 0 10px 25px rgba(11, 83, 95, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    transform: translateY(-3px);
+    border-radius: 16px;
   }
 
   .option-item img, .option-item svg {
     width: 50px;
     height: 50px;
     margin-bottom: 0.5rem;
+    color: #ffffff;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all 0.4s ease;
+  }
+
+  .option-item:hover svg {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.3));
+  }
+
+  .option-item.selected svg {
+    color: #ffffff;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+    transform: scale(1.1);
+    animation: svgGlow 2s infinite alternate;
   }
 
   .option-item span {
     font-size: 0.9rem;
+    /* Preserve all other text styling from desktop */
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .option-item:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(11, 83, 95, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    background: rgba(11, 83, 95, 0.9);
+  }
+
+  .option-item:hover span {
+    color: rgba(248, 248, 248, 1);
+  }
+
+  .option-item.selected {
+    border-color: rgba(255, 255, 255, 1);
+    background: linear-gradient(135deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 100%);
+    box-shadow: 0 12px 35px rgba(11, 83, 95, 0.5),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.8),
+                0 0 25px rgba(11, 83, 95, 0.6),
+                0 0 15px rgba(255, 255, 255, 0.4);
+    transform: translateY(-6px) scale(1.05);
+    animation: glowPulse 2s infinite alternate;
+    position: relative;
+    z-index: 10;
+  }
+
+  .option-item.selected span {
+    color: rgba(248, 248, 248, 1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 15px rgba(255, 255, 255, 0.5);
+    animation: textGlow 2s infinite alternate;
   }
 
   .container {
-    padding: 1rem 1.5rem;
-    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    box-shadow: var(--shadow-strong),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 5px 15px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    width: 94%;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .form-group {
@@ -1023,6 +1133,12 @@ select:focus {
 
   .form-group label {
     font-size: 0.95em;
+    /* Preserve all other text styling from desktop */
+    font-weight: 500;
+    text-align: left;
+    color: rgba(11, 83, 95, 1);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
   input[type="text"],
@@ -1033,27 +1149,58 @@ select:focus {
   }
 
   button {
-    padding: 0.8em 1.5em;
+    padding: 0.9em 1.8em;
     font-size: 0.95em;
+    font-weight: 500;
+    background: linear-gradient(135deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 50%, rgba(5, 45, 55, 1) 100%);
+    color: rgba(255, 255, 255, 1);
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(11, 83, 95, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
   }
 
   /* Fit preferences page specific styles */
   .fit-preferences-page .slider-container {
-    max-width: 325px !important;
+    max-width: 300px !important;
+    width: 90% !important;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 83, 95, 0.2);
+    padding: 1.2rem 1.5rem;
   }
 
   .fit-preferences-page .navigation {
-    max-width: 325px;
-    margin: 2rem auto 0;
+    max-width: 300px;
+    width: 90%;
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
   }
 
   .fit-preferences-page .navigation button {
-    padding: 0.7em 1.4em;
+    padding: 0.7em 1.2em;
     font-size: 0.9em;
+    flex: 1;
+    min-width: 0;
   }
 
   .fit-preferences-page .slider-labels span {
     font-size: 0.85rem;
+    /* Preserve all other text styling from desktop */
+    background: linear-gradient(90deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
   .unit-toggle {
@@ -1065,13 +1212,23 @@ select:focus {
   }
 
   .result-item {
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 24px;
     flex-direction: column;
     gap: 0.8rem;
     align-items: center;
     text-align: center;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 83, 95, 0.2);
+  }
+
+  .primary-result .size-label,
+  .primary-result .percentage {
+    color: #0B535F;
   }
 
   .progress-bar {
@@ -1082,11 +1239,13 @@ select:focus {
   .size-label {
     order: 1;
     font-size: 2rem;
+    color: rgba(11, 83, 95, 1);
   }
 
   .percentage {
     order: 3;
     text-align: center;
+    color: rgba(11, 83, 95, 1);
   }
 
   .results-container {
@@ -1094,11 +1253,31 @@ select:focus {
   }
 
   .fit-summary {
-    padding: 1.2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(11, 83, 95, 0.2);
   }
 
   .progress-indicator {
     margin-bottom: 1rem;
+    width: 90%;
+  }
+
+  .progress-steps {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, rgba(11, 83, 95, 1) 0%, rgba(8, 65, 75, 1) 100%);
+    padding: 0.35rem 0.9rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   .slider-labels {
@@ -1111,12 +1290,13 @@ select:focus {
 
   .percentage {
     font-size: 0.95rem;
+    color: rgba(11, 83, 95, 1);
   }
 }
 
 @media (max-width: 375px) {
   .container {
-    padding: 0.8rem;
+    padding: 1.2rem 1.5rem;
   }
 
   .result-item {
@@ -1147,9 +1327,18 @@ select:focus {
     font-size: 1.6em;
   }
 
+  .logo-container img {
+    max-width: 120px;
+  }
+
   .primary-result::before {
     font-size: 0.7rem;
     padding: 3px 10px;
+  }
+
+  .primary-result .size-label,
+  .primary-result .percentage {
+    color: #0B535F;
   }
 
   .app-footer {
