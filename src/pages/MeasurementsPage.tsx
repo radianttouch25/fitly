@@ -9,61 +9,78 @@ interface MeasurementsPageProps {
 }
 
 const MeasurementsPage = ({ userData, updateUserData, onNext }: MeasurementsPageProps) => {
-  const [heightValue, setHeightValue] = useState(userData.height.toString())
-  const [weightValue, setWeightValue] = useState(userData.weight.toString())
+  const [heightValue, setHeightValue] = useState('')
+  const [weightValue, setWeightValue] = useState('')
   const [isFormValid, setIsFormValid] = useState(false)
-  
+
   // Handle height unit toggle
   const toggleHeightUnit = () => {
     const currentHeight = parseFloat(heightValue) || 0
     const newUnit = userData.heightUnit === 'cm' ? 'in' : 'cm'
     const convertedHeight = convertHeight(currentHeight, userData.heightUnit, newUnit)
-    
-    setHeightValue(convertedHeight.toFixed(1))
-    updateUserData({ 
-      heightUnit: newUnit,
-      height: convertedHeight
-    })
+
+    // Only set a value if there was an input value
+    if (heightValue !== '') {
+      setHeightValue(convertedHeight.toFixed(1))
+      updateUserData({
+        heightUnit: newUnit,
+        height: convertedHeight
+      })
+    } else {
+      updateUserData({
+        heightUnit: newUnit
+      })
+    }
   }
-  
+
   // Handle weight unit toggle
   const toggleWeightUnit = () => {
     const currentWeight = parseFloat(weightValue) || 0
     const newUnit = userData.weightUnit === 'kg' ? 'lbs' : 'kg'
     const convertedWeight = convertWeight(currentWeight, userData.weightUnit, newUnit)
-    
-    setWeightValue(convertedWeight.toFixed(1))
-    updateUserData({ 
-      weightUnit: newUnit,
-      weight: convertedWeight
-    })
+
+    // Only set a value if there was an input value
+    if (weightValue !== '') {
+      setWeightValue(convertedWeight.toFixed(1))
+      updateUserData({
+        weightUnit: newUnit,
+        weight: convertedWeight
+      })
+    } else {
+      updateUserData({
+        weightUnit: newUnit
+      })
+    }
   }
-  
+
   // Handle form submission
   const handleSubmit = () => {
-    const height = parseFloat(heightValue)
-    const weight = parseFloat(weightValue)
-    
-    updateUserData({ height, weight })
-    onNext()
+    const height = parseFloat(heightValue) || 0
+    const weight = parseFloat(weightValue) || 0
+
+    // Only proceed if both values are valid
+    if (height > 0 && weight > 0) {
+      updateUserData({ height, weight })
+      onNext()
+    }
   }
-  
+
   // Validate form
   useEffect(() => {
-    const height = parseFloat(heightValue)
-    const weight = parseFloat(weightValue)
-    
+    const height = parseFloat(heightValue) || 0
+    const weight = parseFloat(weightValue) || 0
+
     if (height > 0 && weight > 0) {
       setIsFormValid(true)
     } else {
       setIsFormValid(false)
     }
   }, [heightValue, weightValue])
-  
+
   return (
     <div className="container">
       <h2>Enter your measurements</h2>
-      <form 
+      <form
         onSubmit={(e) => {
           e.preventDefault()
           handleSubmit()
@@ -80,19 +97,19 @@ const MeasurementsPage = ({ userData, updateUserData, onNext }: MeasurementsPage
               min="0"
               value={heightValue}
               onChange={(e) => setHeightValue(e.target.value)}
-              placeholder={`Your height in ${userData.heightUnit}`}
+              placeholder={`Enter height in ${userData.heightUnit}`}
               inputMode="decimal"
             />
             <div className="unit-toggle">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={toggleHeightUnit}
                 className={userData.heightUnit === 'cm' ? 'active' : ''}
               >
                 cm
               </button>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={toggleHeightUnit}
                 className={userData.heightUnit === 'in' ? 'active' : ''}
               >
@@ -101,7 +118,7 @@ const MeasurementsPage = ({ userData, updateUserData, onNext }: MeasurementsPage
             </div>
           </div>
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="weight">Weight</label>
           <div className="input-with-units">
@@ -112,19 +129,19 @@ const MeasurementsPage = ({ userData, updateUserData, onNext }: MeasurementsPage
               min="0"
               value={weightValue}
               onChange={(e) => setWeightValue(e.target.value)}
-              placeholder={`Your weight in ${userData.weightUnit}`}
+              placeholder={`Enter weight in ${userData.weightUnit}`}
               inputMode="decimal"
             />
             <div className="unit-toggle">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={toggleWeightUnit}
                 className={userData.weightUnit === 'kg' ? 'active' : ''}
               >
                 kg
               </button>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={toggleWeightUnit}
                 className={userData.weightUnit === 'lbs' ? 'active' : ''}
               >
@@ -133,11 +150,11 @@ const MeasurementsPage = ({ userData, updateUserData, onNext }: MeasurementsPage
             </div>
           </div>
         </div>
-        
+
         <div className="navigation">
           <div></div> {/* Empty div for spacing */}
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={!isFormValid}
           >
             Next
